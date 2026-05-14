@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Nikol's Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+  <!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn" class="music-btn">🔊 Music</button>
+
+<canvas id="petalCanvas"></canvas>
+
+<!-- LOADING SCREEN -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <div class="loader-petals">
+      <span>🌸</span><span>✨</span><span>🌸</span>
+      <span>✨</span><span>🌸</span><span>✨</span>
+    </div>
+    <p class="loader-text">loading something cute<span class="loader-dots"><span>.</span><span>.</span><span>.</span></span></p>
+    <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
+  </div>
+</div>
+
+<div class="progress-bar" id="progressBar"></div>
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+
+<!-- PAGE TRANSITION OVERLAY -->
+<div class="page-transition" id="pageTransition">
+  <div class="transition-petal">🌸</div>
+</div>
+
+<!-- MOOD TOGGLE BUTTON -->
+<button id="moodToggleBtn" title="Change vibe">🎨</button>
+
+<!-- MOOD PANEL -->
+<div class="mood-panel" id="moodPanel">
+  <p class="mood-panel-title">Choose your vibe ✨</p>
+  <div class="mood-options">
+    <button class="mood-btn active" data-mood="cherry">
+      <span class="mood-icon">🌸</span>
+      <span class="mood-label">Cherry Blossom</span>
+    </button>
+    <button class="mood-btn" data-mood="midnight">
+      <span class="mood-icon">🌙</span>
+      <span class="mood-label">Midnight</span>
+    </button>
+    <button class="mood-btn" data-mood="golden">
+      <span class="mood-icon">🌅</span>
+      <span class="mood-label">Golden Hour</span>
+    </button>
+    <button class="mood-btn" data-mood="ocean">
+      <span class="mood-icon">🌊</span>
+      <span class="mood-label">Ocean Dream</span>
+    </button>
+    <button class="mood-btn" data-mood="forest">
+      <span class="mood-icon">🌿</span>
+      <span class="mood-label">Enchanted Forest</span>
+    </button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <h1 class="logo">
+  <img src="images/logo.jpg" alt="Logo">
+  <span>Nikol</span>
+</h1>
+  <!-- HAMBURGER for mobile -->
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul id="navMenu">
+    <li><a href="#about">About</a></li>
+    <li><a href="#purpose">Purpose</a></li>
+    <li><a href="#prof">Professor</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- MOBILE MENU OVERLAY -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glass-card reveal">
+    <div class="hero-content">
+      <h1>Nikol Velante</h1>
+      <h2><span id="typingText"></span><span class="typing-cursor">|</span></h2>
+      <p class="description">Assessment in Learning EDUM205 N2AM.</p>
+      <button id="exploreBtn">Explore ✨</button>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label reveal">01 — About</div>
+  <h2 class="section-heading reveal">About Me</h2>
+  <div class="about-card reveal">
+    <p>Hi there! I am Nikol I. Velante, 19 years old, from Camarines Norte, and currently a second-year Bachelor of Secondary Education major in Science student at Ateneo de Naga University.</p>
+    <p>Beyond my academic life, I am someone who enjoys exploring new experiences and capturing meaningful moments. I have always been open to challenges, whether it is stepping out of my comfort zone by joining beauty pageants or strengthening my discipline and creativity through physical activities like running and boxing.</p>
+    <p>These experiences have helped shape my confidence, resilience, and determination. As I continue my journey, I strive to grow not only as a student but also as an individual who is passionate about learning and self-improvement, believing that every experience contributes to who I am becoming while I pursue my goals with purpose and perseverance..</p>
+  </div>
+</section>
+
+<!-- PURPOSE -->
+<section id="purpose">
+  <div class="section-label reveal">02 — Purpose</div>
+  <h2 class="section-heading reveal">Purpose</h2>
+  <div class="about-card reveal">
+    <p>This website is intended to showcase who I am and what I do as a learner and future educator. Presented here are various artifacts from EDUM205: Assessment in Learning, which I have carefully developed throughout the semester.</p>
+    <p>Each artifact reflects not only my understanding of assessment principles but also my growth in designing meaningful and effective ways to evaluate student learning. These outputs serve as a strong foundation in developing my skills in assessment, which I recognize as an essential component of teaching.</p>
+    <p>As I continue my journey toward becoming an Ignatian teacher, I aim to use these learnings to create thoughtful, learner-centered assessments that promote deeper understanding and holistic development.</p>
+  </div>
+</section>
+
+<!-- PURPOSE -->
+<section id="prof">
+  <div class="section-label reveal">03 — About my Professor</div>
+  <h2 class="section-heading reveal">Professor's Introduction</h2>
+  <div class="about-card reveal">
+    <p>Some say that in a child’s entire learning journey, from elementary to higher education, there is at least one teacher they will never forget, and for me, that teacher is Sir Popoy. Sir Arnulfo R. Reganit, more commonly known as Sir Popoy, is my professor in EDUM205 Assessment in Learning.</p>
+    <p>He is someone whom students naturally look up to, not only because of his presence and aura whenever he enters the classroom, but also because of the depth and clarity he brings to every lesson. His wisdom, grit, and passion for teaching have made me realize how impactful and inspiring a teacher can truly be, as he consistently goes beyond what is expected.</p>
+    <p>He has a unique ability to connect lessons to real life experiences, making it easier for learners to understand and appreciate the concepts being taught. Through his guidance, I have gained not only knowledge about assessment but also a deeper appreciation for the role of a teacher in shaping students’ lives, reminding me of the kind of educator I aspire to become, one who teaches with purpose, inspires with passion, and leaves a lasting impact on every learner.</p>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section id="projects">
+  <div class="section-label reveal">04 — Projects</div>
+  <h2 class="section-heading reveal">My Artifacts</h2>
+
+  <div class="stack-scroll-container">
+    <!-- NAV ROW -->
+    <div class="stack-nav">
+      <button class="stack-arrow" id="stackLeft" aria-label="Previous">&#8249;</button>
+      <span class="stack-counter" id="stackCounter">1 / 7</span>
+      <button class="stack-arrow" id="stackRight" aria-label="Next">&#8250;</button>
+    </div>
+
+    <!-- VIEWPORT -->
+    <div class="stack-viewport" id="stackVP">
+      <div class="stack-wrapper" id="stackScroll">
+
+        <div class="stack-card active"
+          data-title="Artifact 1: Test Questionaire "
+          data-desc="I had been looking forward to working on this artifact because, as a future teacher, I understand that teaching must be paired with assessing students’ learning, and one common way to do this is through written examinations. However, while creating this output, I realized that designing a test paper is more challenging than I expected, as it is not just about preparing a set number of questions but about measuring what students have truly learned and ensuring that each item aligns with the lesson objectives. I also learned the importance of creating fair and reliable questions that accurately reflect students’ knowledge and skills. Despite these challenges, the experience was fulfilling because it helped me appreciate the responsibility that comes with assessment. This artifact is meaningful to me as I continue my journey toward becoming an Ignatian teacher, and I believe I will look back on this experience as a foundation for creating effective assessments in the future. I am grateful to Sir Popoy for guiding me and teaching me how to design a test properly."
+          data-img="images/artifact1a.jpg">
+          <img src="images/artifact1a.jpg" alt="Artifact 1">
+          <h3>Artifact 1</h3>
+        </div>
+
+        <div class="stack-card"
+          data-title="Artifact 2: Defend Cheating"
+          data-desc="To be honest, I had no idea how to approach this artifact on defending cheating at all costs. It was one of the toughest questions I have encountered because cheating is inherently wrong and unethical, and I struggled to find a way to justify it. Nonetheless, I attempted to connect my response to a concept from our subject, philosophical anthropology, particularly utilitarianism, in order to frame my argument."
+          data-img="images/artifact2.jpg">
+          <img src="images/artifact2.jpg" alt="Artifact 2">
+          <h3>Artifact 2</h3>
+        </div>
+
+        <div class="stack-card"
+          data-title="Artifact 3: Project-Based Task Prompt Using the Grasps Model"
+          data-desc="This artifact was the most enjoyable to create, while also being quite challenging. It helped me understand how the GRASPS model works in developing clear and effective project instructions, and how careful planning is needed to ensure that tasks are meaningful and well-structured. As a Science major, I find this artifact especially helpful because project-based tasks in Science can sometimes be complex, but with the guidance of the GRASPS model, instructions can be made simpler and easier for students to understand."
+          data-img="images/artifact3.jpg">
+          <img src="images/artifact3.jpg" alt="Artifact 3">
+          <h3>Artifact 3</h3>
+        </div>
+
+        <div class="stack-card"
+          data-title="Activity 4: Product-Based Rubric"
+          data-desc="To be honest, creating a rubric was the most challenging artifact for me. It required a high level of precision, especially in developing an analytic rubric where each criterion must be clearly defined and described. I found it difficult to formulate the right words for the performance levels and measurements, as they needed to be specific, fair, and easy to understand. This experience made me realize that rubric-making is not just about listing criteria, but about carefully communicating expectations and standards of performance. Although it was a struggle, it also helped me recognize the importance of well-constructed rubrics in guiding students and ensuring objective assessment. I know that I still need to improve and continue practicing in order to master the creation of effective rubrics in the future."
+          data-img="images/artifact4a.jpg">
+          <img src="images/artifact4a.jpg" alt="Artifact 4">
+          <h3>Artifact 4</h3>
+        </div>
+
+        <div class="stack-card"
+          data-title="Artifact 5: Process-Based Rubric"
+          data-desc="Since there are many process-based tasks in Science, especially in laboratory experiments, this artifact was a bit easier to formulate. I immediately had an idea of what task to base the rubric on and how to articulate it clearly. I believe one reason why creating Artifact 5 felt easier was that I had already gained a better understanding of rubric construction and had received helpful feedback from Sir Popoy."
+          data-img="images/artifact5a.jpg">
+          <img src="images/artifact5a.jpg" alt="Artifact 5">
+          <h3>Artifact 5</h3>
+        </div>
+
+        <div class="stack-card"
+          data-title="Artifact 6: Reflective Assessment"
+          data-desc="Makisumaro remains one of my most meaningful outreach experiences because it allowed me to both learn and reflect deeply through the activities we conducted in Milaor. What touched me most as a future educator was my encounter with the children, as it made me realize more clearly why I chose this path and who I am doing this for. Despite the visible struggles within the community, I saw genuine hope and happiness in their eyes, which I found truly priceless. Their smiles and enthusiasm reminded me that even in difficult circumstances, there is always something worth holding on to, and this experience strengthened my commitment to teaching not only as a profession but as a way to inspire, uplift, and make a meaningful difference in the lives of others."
+          data-img="images/artifact6.jpg">
+          <img src="images/artifact6.jpg" alt="Artifact 6">
+          <h3>Artifact 6</h3>
+        </div>
+
+        <div class="stack-card"
+          data-title="Artifact 7: This is Me: A Future Teacher Infographic"
+          data-desc="This artifact is very close to my heart. It reminds me why I am here and why I chose to continue on this path. My personal mantra, “to live for the hope of it all,” is also reflected in this work. Despite every difficult task, challenging activity, and countless sleepless nights, I continue to show up and persevere. I am driven by the hope that lies beyond these hardships and inspired by professors like Sir Popoy, who tirelessly dedicate themselves to teaching and honing future educators like me."
+          data-img="images/artifact7.jpg">
+          <img src="images/artifact7.jpg" alt="Artifact 7">
+          <h3>Artifact 7</h3>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DOTS -->
+    <div class="stack-dots-row" id="stackDots">
+      <span class="sdot active"></span>
+      <span class="sdot"></span>
+      <span class="sdot"></span>
+      <span class="sdot"></span>
+      <span class="sdot"></span>
+      <span class="sdot"></span>
+      <span class="sdot"></span>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-label reveal">05 — Gallery</div>
+  <h2 class="section-heading reveal">My Interests</h2>
+  <div class="insta-frame reveal">
+    <div class="insta-phone">
+      <div class="insta-topbar">
+        <span class="insta-username">nikol.portfolio</span>
+        <span class="insta-dots">•••</span>
+      </div>
+      <div class="insta-scroll-container">
+        <button class="insta-arrow left" id="instaLeft" aria-label="Previous">&#8249;</button>
+        <div class="insta-scroll-wrapper" id="instaScroll">
+          <div class="gallery-card"
+            data-title=""
+            data-desc=""
+            data-img="images/gallery1.jpg">
+            <img src="images/gallery1.jpg" alt="Music">
+            <div class="gallery-card-label"></div>
+          </div>
+          <div class="gallery-card"
+            data-title=""
+            data-desc=""
+            data-img="images/gallery2.jpg">
+            <img src="images/gallery2.jpg" alt="">
+            <div class="gallery-card-label"></div>
+          </div>
+          <div class="gallery-card"
+            data-title=""
+            data-desc=""
+            data-img="images/gallery3.jpg">
+            <img src="images/gallery3.jpg" alt="">
+            <div class="gallery-card-label"></div>
+          </div>
+          <div class="gallery-card"
+            data-title=""
+            data-desc=""
+            data-img="images/gallery4.jpg">
+            <img src="images/gallery4.jpg" alt="">
+            <div class="gallery-card-label"></div>
+          </div>
+          <div class="gallery-card"
+            data-title=""
+            data-desc=""
+            data-img="images/gallery5.jpg">
+            <img src="images/gallery5.jpg" alt="">
+            <div class="gallery-card-label"></div>
+          </div>
+        </div>
+        <button class="insta-arrow right" id="instaRight" aria-label="Next">&#8250;</button>
+      </div>
+      <div class="insta-dots-row" id="instaDots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <div class="insta-bottombar">
+        <span>🤍</span><span>💬</span><span>✈️</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-label reveal">06 — Contact</div>
+  <h2 class="section-heading reveal">Contact</h2>
+  <p class="reveal">Email: <a href="mailto:nvelante@gbox.adnu.edu.ph" class="email-link">nvelante@gbox.adnu.edu.ph</a></p>
+  <div class="socials reveal">
+    <div class="social-btn-wrap">
+      <a href="https://www.facebook.com/nikol.velante" class="social-btn">
+        <span class="social-icon">📘</span> Facebook
+      </a>
+      <div class="social-tooltip">Visit my Facebook 🌸</div>
+    </div>
+    <div class="social-btn-wrap">
+      <a href="https://www.tiktok.com/@nicolyte88" class="social-btn">
+        <span class="social-icon">🎵</span> TikTok
+      </a>
+      <div class="social-tooltip">Check my TikTok ✨</div>
+    </div>
+    <div class="social-btn-wrap">
+      <a href="https://www.instagram.com/ncole_671" class="social-btn">
+        <span class="social-icon">📸</span> Instagram
+      </a>
+      <div class="social-tooltip">Follow me on Instagram 🎀</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-name">Nikol Velante</p>
+    <p class="footer-copy">© <span id="footerYear"></span> · Made with 🌸 and lots of creativity</p>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#projects">Work</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">🌸</button>
+
+<!-- DETAIL MODAL -->
+<div class="detail-view" id="detailView" role="dialog" aria-modal="true">
+  <div class="detail-backdrop"></div>
+  <div class="detail-content">
+    <button id="closeDetail" aria-label="Close">&times;</button>
+    <img id="detailImg" src="" alt="">
+    <h2 id="detailTitle"></h2>
+    <p id="detailDesc"></p>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
