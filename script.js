@@ -385,15 +385,10 @@ const detailTitle = document.getElementById("detailTitle");
 const detailDesc  = document.getElementById("detailDesc");
 const closeDetail = document.getElementById("closeDetail");
 
-// We'll replace the old single <img> with a full gallery strip inside the modal.
-// First, inject the gallery HTML into .detail-content (replaces the old detailImg).
 (function buildModalGallery() {
-  const content = document.querySelector(".detail-content");
-  // Remove the old <img> added by the original HTML
   const oldImg = document.getElementById("detailImg");
   if (oldImg) oldImg.remove();
 
-  // Insert gallery markup right after the close button
   const galleryHTML = `
     <div class="modal-gallery" id="modalGallery">
       <div class="modal-gallery-track" id="modalGalleryTrack"></div>
@@ -406,7 +401,7 @@ const closeDetail = document.getElementById("closeDetail");
   closeDetail.insertAdjacentHTML("afterend", galleryHTML);
 })();
 
-// Per-artifact image arrays — add as many URLs as you want per artifact
+// Per-artifact image arrays
 const artifactImages = {
   0: [
     "images/artifact1a.jpg",
@@ -419,29 +414,12 @@ const artifactImages = {
     "images/artifact1h.jpg",
     "images/artifact1i.jpg"
   ],
-  1: [
-    "images/artifact2.jpg"
-  ],
-  2: [
-    "images/artifact3.jpg"
-  ],
-  3: [
-    "images/artifact4a.jpg",
-    "images/artifact4b.jpg",
-    
-  ],
-  4: [
-    "images/artifact5a.jpg",
-    "images/artifact5b.jpg"
-  ],
-  5: [
-    "images/artifact6.jpg",
-
-  ],
-  6: [
-    "images/artifact7.jpg",
-    
-  ],
+  1: ["images/artifact2.jpg"],
+  2: ["images/artifact3.jpg"],
+  3: ["images/artifact4a.jpg", "images/artifact4b.jpg"],
+  4: ["images/artifact5a.jpg", "images/artifact5b.jpg"],
+  5: ["images/artifact6.jpg"],
+  6: ["images/artifact7.jpg"],
 };
 
 let galCurrent = 0;
@@ -458,7 +436,6 @@ function buildGallery(images) {
   galImages  = images;
   galCurrent = 0;
 
-  // Build slides
   galTrack.innerHTML = "";
   images.forEach((src, i) => {
     const slide = document.createElement("div");
@@ -470,7 +447,6 @@ function buildGallery(images) {
     galTrack.appendChild(slide);
   });
 
-  // Build dots
   galDots.innerHTML = "";
   images.forEach((_, i) => {
     const dot = document.createElement("span");
@@ -493,7 +469,6 @@ function updateGallery() {
   galPrev.disabled       = galCurrent === 0;
   galNext.disabled       = galCurrent === galImages.length - 1;
 
-  // Hide arrows & dots when only 1 image
   const single = galImages.length === 1;
   galPrev.style.display    = single ? "none" : "flex";
   galNext.style.display    = single ? "none" : "flex";
@@ -509,7 +484,6 @@ function goToGalSlide(index) {
 galPrev.addEventListener("click", () => goToGalSlide(galCurrent - 1));
 galNext.addEventListener("click", () => goToGalSlide(galCurrent + 1));
 
-// Touch swipe inside modal gallery
 galTrack.addEventListener("touchstart", e => {
   galTouchX = e.touches[0].clientX;
 }, { passive: true });
@@ -521,7 +495,6 @@ galTrack.addEventListener("touchend", e => {
   }
 }, { passive: true });
 
-// Keyboard arrow navigation inside modal
 document.addEventListener("keydown", e => {
   if (!detailView.classList.contains("open")) return;
   if (e.key === "ArrowLeft")  goToGalSlide(galCurrent - 1);
@@ -529,11 +502,30 @@ document.addEventListener("keydown", e => {
   if (e.key === "Escape")     closeDetailModal();
 });
 
+// ============================
+// FORMAT DESC — Draft / Goal / Reflection
+// ============================
+function formatDesc(raw) {
+  // First, convert any URLs into a clickable "View Document" link
+  const linkedText = raw.replace(
+    /(https?:\/\/[^\s"<]+)/g,
+    '<a href="$1" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:600;text-decoration:underline;">View Document 📄</a>'
+  );
+
+  // Then bold and space the section labels
+  const formatted = linkedText
+    .replace(/(Draft:)/g,      '<strong style="color:var(--accent)">$1</strong>')
+    .replace(/(Goal:)/g,       '<br><br><strong style="color:var(--accent)">$1</strong>')
+    .replace(/(Reflection:)/g, '<br><br><strong style="color:var(--accent)">$1</strong>');
+
+  return formatted;
+}
+
 function openDetail(artifactIndex, title, desc) {
   const images = artifactImages[artifactIndex] || ["https://picsum.photos/800/500"];
   buildGallery(images);
   detailTitle.textContent = title;
-  detailDesc.textContent  = desc;
+  detailDesc.innerHTML    = formatDesc(desc);
   detailView.classList.add("open");
   document.body.style.overflow = "hidden";
 }
@@ -543,11 +535,9 @@ function closeDetailModal() {
   document.body.style.overflow = "";
 }
 
-// Open modal on gallery card click
 document.addEventListener("click", function(e) {
   const galleryCard = e.target.closest(".gallery-card");
   if (galleryCard) {
-    // Gallery section cards — use first image from card's data-img
     const img = galleryCard.dataset.img || "https://picsum.photos/800/500";
     buildGallery([img]);
     detailTitle.textContent = galleryCard.dataset.title || "";
@@ -626,7 +616,6 @@ let sTouchX    = 0;
 function sGetOffset(i) {
   const activeCard = stackCards[0];
   SCARD_W = activeCard.offsetWidth;
-
   const vpW = stackVP.offsetWidth;
   return -(i * (SCARD_W + SGAP)) + ((vpW - SCARD_W) / 2);
 }
@@ -683,20 +672,17 @@ stackDotsEl.forEach(function(d, i) {
   d.addEventListener("click", function() { sGo(i); });
 });
 
-// Click a card to center it, or open modal if already centered
 stackCards.forEach(function(c, i) {
   c.addEventListener("click", function() {
     if (sDragging) return;
     if (i !== sCur) {
       sGo(i);
     } else {
-      // Pass the artifact index (i) so we pick the right image set
       openDetail(i, c.dataset.title, c.dataset.desc);
     }
   });
 });
 
-// Mouse drag
 stackVP.addEventListener("mousedown", function(e) {
   sDragging = false;
   sDragDelta = 0;
@@ -724,7 +710,6 @@ function sDragUp() {
   setTimeout(function() { sDragging = false; }, 10);
 }
 
-// Touch swipe on artifact stack
 stackVP.addEventListener("touchstart", function(e) {
   sTouchX = e.touches[0].clientX;
   stackTrack.style.transition = "none";
@@ -748,12 +733,14 @@ window.addEventListener("resize", function() { sGo(sCur, false); });
 
 sGo(0, false);
 
+// ============================
+// BACKGROUND MUSIC
+// ============================
 const music = document.getElementById("bgMusic");
-const btn = document.getElementById("musicBtn");
+const btn   = document.getElementById("musicBtn");
 
 let isPlaying = false;
 
-// Try play after first interaction
 function startMusic() {
   if (!isPlaying) {
     music.play().then(() => {
@@ -765,7 +752,6 @@ function startMusic() {
   }
 }
 
-// click button
 btn.addEventListener("click", () => {
   if (!isPlaying) {
     music.play();
@@ -777,5 +763,4 @@ btn.addEventListener("click", () => {
   isPlaying = !isPlaying;
 });
 
-// FIRST TAP ANYWHERE ON WEBSITE = START MUSIC
 document.addEventListener("click", startMusic, { once: true });
